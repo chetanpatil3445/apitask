@@ -73,7 +73,18 @@ class _FirmListScreenState extends State<FirmListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Firm List'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
+        ],
+        centerTitle: true,
+        title: Text('All Firm List'),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
@@ -82,33 +93,63 @@ class _FirmListScreenState extends State<FirmListScreen> {
         itemBuilder: (context, index) {
           return Card(
             child: Container(
-              height: 300,
+              height: 110,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  textWidget(_firmList[index].firmId),
-                  textWidget(_firmList[index].firmName),
-                  textWidget(_firmList[index].firmType),
-                  textWidget(_firmList[index].firmEmail),
-                  textWidget(_firmList[index].firmFormFooter),
+                  ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                          },
+                          child:  textWidget(_firmList[index].firmName,
+                            style:  const TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        textWidget(_firmList[index].firmAddress, style: TextStyle(color: Colors.black)),
+                        textWidget(_firmList[index].firmEmail, style: TextStyle(color: Colors.black)),
+                        textWidget(_firmList[index].firmOwner, style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
+
+                    leading: Image.asset(
+                      "Assets/bmw.png",
+                      width: 48,
+                      height: 48,
+                    ),
+
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {},
+                    ),
+                  )
 
                 ],
               ),
+
             ),
           );
         },
       ),
     );
   }
-  Widget textWidget(String? data)
-  {
-    return Column(
-      children: [
-        Text(data ?? '', style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
-        SizedBox(height: 20,)
-      ],
-    );
-  }
-  
+}
+
+Widget textWidget(String? data, {required TextStyle style}) {
+  return Column(
+    children: [
+      Text(
+        data ?? '',
+        style: style,
+      ),
+      SizedBox(height: 5),
+    ],
+  );
 }
