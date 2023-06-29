@@ -82,13 +82,16 @@ class _FirmListScreenState extends State<FirmListScreen> {
         itemBuilder: (context, index) {
           return Card(
             child: Container(
-              height: 200,
+              height: 300,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  textWidget(_firmList[index].firmAddress),
-                  textWidget(_firmList[index].firmAddress),
+                  textWidget(_firmList[index].firmId),
+                  textWidget(_firmList[index].firmName),
+                  textWidget(_firmList[index].firmType),
+                  textWidget(_firmList[index].firmEmail),
+                  textWidget(_firmList[index].firmFormFooter),
 
                 ],
               ),
