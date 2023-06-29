@@ -1,4 +1,6 @@
 
+import 'package:apitask/Model/firm_Request.dart';
+import 'package:apitask/Model/firm_Response.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import '../Controller/Firm_List_Controller.dart';
@@ -11,8 +13,9 @@ class FirmListScreen extends StatefulWidget {
 
 class _FirmListScreenState extends State<FirmListScreen> {
   FirmListController _firmListController = FirmListController();
+
   //List<Map<String, String?>> _firmList = [];
-  List<Map<String, dynamic>> _firmList = [];
+  List<FirmResponse> _firmList = [];
   bool _isLoading = false;
 
   @override
@@ -28,27 +31,29 @@ class _FirmListScreenState extends State<FirmListScreen> {
 
     try {
       final response = await _firmListController.fetchFirmList(
-        apiRequestType: "MOB_APP",
-        ecomOwnId: "101010",
-        ecomLoginId: "lrearth",
-        systemOnOff: "ON",
-        gbDbHost: "43.205.122.41",
-        userLoginId: "lrearth",
-        ecomDomainName: "omunim.com",
-        ecomApiKey: "",
-        apiLoginToken: "abc12313",
-        apiProdKey: "123123",
-        apiRequestId: "lrearth",
-        apiFolder: "",
-        mapiFolder: "",
-        remoteLogin: "HTTP_REMOTE_LOGIN",
-        gbDbPort: "3306",
-        gbDbUser: "",
-        userDbHost: "",
-        userDbPort: "",
-        userDbUser: "",
-        ownerLoginId: "lrearth",
-        ownerUserPassword: "",
+          FirmListRequest(
+            apiRequestType: "MOB_APP",
+            ecomOwnId: "101010",
+            ecomLoginId: "lrearth",
+            systemOnOff: "ON",
+            gbDbHost: "43.205.122.41",
+            userLoginId: "lrearth",
+            ecomDomainName: "omunim.com",
+            ecomApiKey: "",
+            apiLoginToken: "abc12313",
+            apiProdKey: "123123",
+            apiRequestId: "lrearth",
+            apiFolder: "",
+            mapiFolder: "",
+            remoteLogin: "HTTP_REMOTE_LOGIN",
+            gbDbPort: "3306",
+            gbDbUser: "",
+            userDbHost: "",
+            userDbPort: "",
+            userDbUser: "",
+            ownerLoginId: "lrearth",
+            ownerUserPassword: "",
+          )
       );
 
       setState(() {
@@ -75,7 +80,6 @@ class _FirmListScreenState extends State<FirmListScreen> {
           : ListView.builder(
         itemCount: _firmList.length,
         itemBuilder: (context, index) {
-          final Map<String, dynamic> firm = _firmList[index];
           return Card(
             child: Container(
               height: 200,
@@ -83,15 +87,9 @@ class _FirmListScreenState extends State<FirmListScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(firm['firm_id'] ?? '', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
-                  SizedBox(height: 20,),
-                  Text(firm['firm_own_id'] ?? '', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
-                  SizedBox(height: 20,),
-                  Text(firm['firm_name'] ?? '', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
-                  SizedBox(height: 20,),
-                  Text(firm['firm_reg_no'] ?? '', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
-                  SizedBox(height: 20,),
-                  Text(firm['firm_type'] ?? '', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
+                  textWidget(_firmList[index].firmAddress),
+                  textWidget(_firmList[index].firmAddress),
+
                 ],
               ),
             ),
@@ -100,4 +98,14 @@ class _FirmListScreenState extends State<FirmListScreen> {
       ),
     );
   }
+  Widget textWidget(String? data)
+  {
+    return Column(
+      children: [
+        Text(data ?? '', style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold, fontSize: 18)),
+        SizedBox(height: 20,)
+      ],
+    );
+  }
+  
 }

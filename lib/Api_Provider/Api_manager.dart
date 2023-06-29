@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../Model/mob_Request.dart';
+import '../Model/firm_Request.dart';
 
 class ApiManager {
   static const String baseUrl = "https://mapi.omunim.in/";
