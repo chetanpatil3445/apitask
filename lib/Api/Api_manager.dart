@@ -5,7 +5,7 @@ import '../Model/firm_Request.dart';
 class ApiManager {
   static const String baseUrl = "https://mapi.omunim.in/";
 
-  Future<List<Map<String, String?>>> fetchFirmList(FirmListRequest request) async {
+  Future<List<Map<String, String?>>> fetchFirmList(FIrmRequest request) async {
     final url = Uri.parse(baseUrl + "firm/get_all_firm_details");
     final headers = {'Content-Type': 'application/json'};
     final body = request.toJson();

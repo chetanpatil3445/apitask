@@ -1,6 +1,6 @@
 
 
-class FirmListRequest {
+class FIrmRequest {
   final String? apiRequestType;
   final String? ecomOwnId;
   final String? ecomLoginId;
@@ -23,7 +23,7 @@ class FirmListRequest {
   final String? ownerLoginId;
   final String? ownerUserPassword;
 
-  FirmListRequest({
+  FIrmRequest({
      this.apiRequestType,
      this.ecomOwnId,
      this.ecomLoginId,
